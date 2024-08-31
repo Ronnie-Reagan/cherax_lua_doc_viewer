@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Viewer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.7.0/jsoneditor.min.css" />
+    <style>
+        #jsoneditor {
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>JSON Viewer</h1>
+    <div id="jsoneditor"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.7.0/jsoneditor.min.js"></script>
+    <script>
+        // Initialize the JSON editor
+        const container = document.getElementById("jsoneditor");
+        const options = {
+            mode: "tree",
+            modes: ["tree", "code"], // allowed modes
+        };
+        const editor = new JSONEditor(container, options);
+
+        // Load your JSON data (you can replace this with your JSON file path)
+        fetch('Documentation.json')
+            .then(response => response.json())
+            .then(json => {
+                editor.set(json);
+            })
+            .catch(error => {
+                console.error('Error loading JSON:', error);
+            });
+    </script>
+</body>
+</html>
